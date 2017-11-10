@@ -31,7 +31,7 @@ Collection overview and statistics
 
    .. sourcecode:: http
 
-      $ curl -i -XGET :rest_api_v0:'v0/sources'
+      $ curl -i -XGET :rest_api_v0:`v0/sources`
 
    **Example response**
 
