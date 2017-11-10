@@ -31,7 +31,7 @@ Collection overview and statistics
 
    .. sourcecode:: http
 
-      $ curl -i -XGET 'http://api.openraadsinformatie.nl/v0/sources'
+      $ curl -i -XGET :rest_api_v0:'v0/sources'
 
    **Example response**
 
@@ -102,7 +102,7 @@ Searching within multiple collections
 
    .. sourcecode:: http
 
-      $ curl -i -XPOST 'http://api.openraadsinformatie.nl/v0/search' -d '{
+      $ curl -i -XPOST :rest_api_v0:'v0/search' -d '{
          "query": "vergadering",
          "facets": {
             "collection": {},
@@ -365,7 +365,7 @@ Retrieving a single object
 
    .. sourcecode:: http
 
-      $ curl -i 'http://api.openraadsinformatie.nl/v0/den_helder/events/4a39c497c7818af9ad6d7d8335a6e951d6a83bd6'
+      $ curl -i :rest_api_v0:'v0/den_helder/events/4a39c497c7818af9ad6d7d8335a6e951d6a83bd6'
 
    **Example response**
 
@@ -929,7 +929,7 @@ Retrieving a single object
 
    .. sourcecode:: http
 
-      $ curl -i 'http://api.openraadsinformatie.nl/v0/den_helder/events/4a39c497c7818af9ad6d7d8335a6e951d6a83bd6/source'
+      $ curl -i :rest_api_v0:'v0/den_helder/events/4a39c497c7818af9ad6d7d8335a6e951d6a83bd6/source'
 
    **Example response**
 
@@ -957,7 +957,7 @@ Retrieving a single object
 
    .. sourcecode:: http
 
-      $ curl -i 'http://api.openraadsinformatie.nl/v0/den_helder/events/4a39c497c7818af9ad6d7d8335a6e951d6a83bd6/stats'
+      $ curl -i :rest_api_v0:'v0/den_helder/events/4a39c497c7818af9ad6d7d8335a6e951d6a83bd6/stats'
 
    **Example response**
 
@@ -993,7 +993,7 @@ Similar items
 
   .. sourcecode:: http
 
-    $ curl -i -XPOST 'http://api.openraadsinformatie.nl/v0/similar/<object_id>' -d '{
+    $ curl -i -XPOST :rest_api_v0:'v0/similar/<object_id>' -d '{
        "facets": {
           "classification": {}
        },
