@@ -3,7 +3,7 @@
 Quickstart
 ===================
 
-Anxious to get started right away? This page provides you with a short introduction on how to get started with querying the Open Raadsinformatie API.
+Anxious to get started right away? This page provides you with a short introduction on how to get started with querying the Openwob API.
 
 The base URL of the API is :rest_api_v0:`v0`, but it won't return any data.
 

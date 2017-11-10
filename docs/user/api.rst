@@ -951,7 +951,7 @@ Retrieving a single object
 
 .. http:get:: /(source_id)/(doc_type)/(object_id)/stats
 
-   Retrieves statistics about the usage of the object within the Open Raadsinformatie API.
+   Retrieves statistics about the usage of the object within the Openwob API.
 
    **Example request**
 
@@ -1037,7 +1037,7 @@ Similar items
 
 Resolver
 --------
-The Open Raadsinformatie API provides all (media) urls as NPO Backstage Resolver URLs. This will route all requests for content through the API, which will process and validate the URL, and provide a redirect to the original content source. This will allow for caching or rate limiting on API level in the future, to prevent excessive amounts of requests to the sources.
+The Openwob API provides all (media) urls as NPO Backstage Resolver URLs. This will route all requests for content through the API, which will process and validate the URL, and provide a redirect to the original content source. This will allow for caching or rate limiting on API level in the future, to prevent excessive amounts of requests to the sources.
 
 .. todo::
 
