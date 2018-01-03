@@ -1,9 +1,10 @@
 var owa_cur_date = new Date();
-var owa_cur_year = owa_cur_date.getFullYear();
+var owa_start_date = new Date();
+owa_start_date.setTime(owa_cur_date.getTime() - (6 * 30 * 86400000));
 var OpenWOBApp = window.OpenWOBApp || {
   "api_base_url": "https://api.openwob.nl/v0",
-  "start_date": owa_cur_year + "-01-01T00:00:00",
-  "end_date": owa_cur_year + "21-31T23:59:59",
+  "start_date": owa_start_date,
+  "end_date": owa_cur_date,
   "data":{
     "delay": 0,
     "months": [],
@@ -175,8 +176,8 @@ OpenWOBApp.tagcloud = function(dom,tag) {
 };
 
 OpenWOBApp.set_date_years = function(start_year, end_year) {
-  OpenWOBApp.start_date =start_year + "-01-01T00:00:00";
-  OpenWOBApp.end_date = end_year + "-12-31T23:59:59";
+  OpenWOBApp.start_date =start_year;
+  OpenWOBApp.end_date = end_year;
   OpenWOBApp.get_data(OpenWOBApp.start_date, OpenWOBApp.end_date);
 };
 

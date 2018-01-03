@@ -61,8 +61,10 @@
 <script type="text/javascript">
 $(document).ready(function() {
   var cur_date = new Date();
-  var cur_year = cur_date.getFullYear();
-  OpenWOBApp.set_date_years(cur_year, cur_year);
+  var start_date = new Date();
+  start_date.setTime(cur_date.getTime() - (6 * 30 * 86400000));
+  console.log('Starting to get stats for ' + start_date + ' to ' + cur_date);
+  OpenWOBApp.set_date_years(start_date, cur_date);
 });
 </script>
 {% endblock %}
