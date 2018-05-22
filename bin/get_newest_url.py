@@ -6,8 +6,9 @@ import json
 
 def main():
     result = json.load(sys.stdin)
+    excel_resources = [f for f in result[u'result'][u'resources'] if f[u'format'].startswith('XLS')]
     try:
-        print result[u'result'][u'resources'][0][u'url']
+        print excel_resources[0][u'url']
     except LookupError:
         return 1
     return 0

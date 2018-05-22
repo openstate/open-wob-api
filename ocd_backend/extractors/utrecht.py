@@ -102,6 +102,7 @@ class UtrechtExtractor(BaseExtractor, HttpRequestMixin):
     def run(self):
         for url in self.source_definition['urls']:
             for item_url in self.get_collection_objects(url):
+                print item_url
                 yield self.get_object(item_url)
 
 
@@ -156,6 +157,7 @@ class UtrechtOverviewExtractor(GlobExtractor):
         header = False
         processing = False
         processed = 0
+        print file_path
         year = int(os.path.basename(file_path)[0:4])
         for row_num in xrange(0, sh.nrows):
             values = sh.row_values(row_num)

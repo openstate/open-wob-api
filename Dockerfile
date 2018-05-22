@@ -24,6 +24,8 @@ RUN apt-get update \
         openjdk-7-jre-headless \
         wget \
         curl \
+        libpoppler-private-dev \
+        libpoppler-cpp-dev \
         poppler-utils \
         software-properties-common \
         autoconf \
@@ -35,11 +37,18 @@ RUN apt-get update \
         inotify-tools \
         vim
 
+RUN add-apt-repository ppa:jonathonf/python-2.7 \
+    && apt-get update \
+    && apt-get install -y python2.7
+
 RUN add-apt-repository ppa:mc3man/trusty-media \
     && apt-get update \
     && apt-get dist-upgrade -y
 
-RUN apt-get install -y \
+RUN apt-get update \
+    && apt-get install -y \
+        cmake3 \
+        cmake3-data \
         make \
         libxml2-dev \
         libxslt1-dev \
@@ -107,24 +116,23 @@ ADD . /opt/owa
 # Install Python requirements
 COPY ocd_backend/requirements.txt /opt/owa/requirements.txt
 RUN source /opt/bin/activate \
+    && pip install --upgrade pip \
+    && pip install --upgrade setuptools \
     && pip install pycparser==2.13 \
     && pip install Cython==0.21.2 \
     && pip install -r requirements.txt
 
 # Install poppler for pdfparser
-RUN git clone --depth 1 git://git.freedesktop.org/git/poppler/poppler /tmp/poppler
-RUN git clone https://github.com/izderadicka/pdfparser.git /tmp/pdfparser
-WORKDIR /tmp/poppler/
-RUN ./autogen.sh \
-  && ./configure --disable-poppler-qt4 --disable-poppler-qt5 --disable-poppler-cpp --disable-gtk-test --disable-splash-output --disable-utils \
-  && make \
-  && make install
-
-# Install pdfparser
-WORKDIR /tmp/pdfparser/
-RUN ldconfig /tmp/pdfparser \
-  && source /opt/bin/activate \
-  && POPPLER_ROOT=/tmp/poppler python setup.py install
+# RUN git clone --depth 1 git://git.freedesktop.org/git/poppler/poppler /tmp/poppler
+# RUN git clone https://github.com/izderadicka/pdfparser.git /tmp/pdfparser
+# WORKDIR /tmp/poppler/
+# RUN mkdir build && cd build && cmake -DENABLE_QT5=OFF -DENABLE_LIBOPENJPEG=none .. && make && make install
+#
+# # Install pdfparser
+# WORKDIR /tmp/pdfparser/
+# RUN ldconfig /tmp/pdfparser \
+#   && source /opt/bin/activate \
+#   && POPPLER_ROOT=/tmp/poppler python setup.py install
 
 RUN apt-get install supervisor
 
@@ -148,6 +156,7 @@ RUN adduser --disabled-password celery \
   && chown celery:celery /opt/owa/ocd_backend/temp \
   && touch /opt/owa/backend.log \
   && chown celery:celery /opt/owa/backend.log \
+  && mkdir -p /opt/owa/log \
   && touch /opt/owa/log/celery.log \
   && chown celery:celery  /opt/owa/log/celery.log
 

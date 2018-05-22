@@ -6,4 +6,4 @@ cd /opt/owa
 ./manage.py extract start utrecht_overview
 ./manage.py extract start utrecht_new
 ./manage.py extract start utrecht_categories
-./bin/send_emails.py
+# ./bin/send_emails.py

@@ -175,11 +175,12 @@ class UtrechtItem(BaseItem):
             label = u''.join(u.xpath('.//text()'))
             if actual_url.startswith(u'/'):
                 actual_url = u'https://www.utrecht.nl%s' % (actual_url,)
-            combined_index_data['media_urls'].append({
-                'original_url': actual_url,
-                'content_type': u'application/pdf',
-                'label': label
-            })
+            if actual_url.lower().endswith('.pdf'):
+                combined_index_data['media_urls'].append({
+                    'original_url': actual_url,
+                    'content_type': u'application/pdf',
+                    'label': label
+                })
 
         return combined_index_data
 
