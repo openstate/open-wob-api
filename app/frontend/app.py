@@ -319,9 +319,13 @@ def stats():
 
 @app.route("/<gov_slug>")
 def gov_home(gov_slug):
-    facets = api.search_questions(gov_slug=gov_slug, page=1, size=0)
+    start_date = '%s000' % (
+        datetime.date(datetime.date.today().year, 1, 1).strftime('%X'),)
+    facets = api.search_questions(
+        gov_slug=gov_slug, page=1, size=0, start_date=start_date)
     results = api.search_questions(
-        gov_slug=gov_slug, page=1, size=5, status='Openstaand')
+        gov_slug=gov_slug, page=1, size=5, status='Openstaand',
+        start_date=start_date)
     return render_template(
         'gov.html', gov_slug=gov_slug, results=results, facets=facets)
 
