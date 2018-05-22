@@ -25,9 +25,11 @@
     {% endif %}
   </div>
   <div class="col-xs-12 col-md-6" id="open-requests">
+    {% if 'meta' in results %}
     <h2>Openstaande WOB verzoeken</h2>
     {% include 'results_as_condensed_list.html' %}
     <a href="{{ url_for('search', gov_slug=gov_slug, status='Openstaand') }}" class="btn btn-default btn-large" style="width: 100%;">Toon alle {{ results.meta.total }} openstaande wob verzoeken</a>
+    {% endif %}
   </div>
 </div>
 </section>
