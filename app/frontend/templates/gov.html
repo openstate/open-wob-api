@@ -10,8 +10,6 @@
 <section id="browse">
 <div class="row">
   <div class="col-xs-12 col-md-6" id="categories">
-    {{ facets }}
-
     {% if 'facets' in facets %}
     <h2>Zoeken per thema</h2>
     {% for category in facets.facets.categories.buckets %}
