@@ -69,6 +69,9 @@ class UtrechtItem(BaseItem):
             if not re.match('^\d{4}', wob_id):
                 # Use slug as object id
                 wob_id = unicode(self._get_url().split('/')[-2])
+        if wob_status.lower() in ['wob-besluit', 'wob-besluiten', 'wob']:
+            wob_status = u'Besluit'
+
         return (wob_id, wob_status, wob_title,)
 
     def _get_hashed_id(self, wob_id):
