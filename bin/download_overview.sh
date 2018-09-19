@@ -7,5 +7,5 @@ OVERVIEW_URL=`curl -s 'https://ckan.dataplatform.nl/api/3/action/package_show?id
 if [ $? -eq 0 ];
 then
   echo "$OVERVIEW_URL"
-  wget -q -O "ocd_backend/overviews/utrecht/201752.xlsx" "$OVERVIEW_URL"
+  wget -q -O "ocd_backend/overviews/utrecht/`date +%Y%W`.xlsx" "$OVERVIEW_URL"
 fi
