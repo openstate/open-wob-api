@@ -319,13 +319,19 @@ def stats():
 
 @app.route("/<gov_slug>")
 def gov_home(gov_slug):
+    t = datetime.datetime.today()
+    td = datetime.timedelta(days=90)
+    sd = t - td
     start_date = int('%s000' % (
-        datetime.date(datetime.date.today().year, 1, 1).strftime('%s'),))
+        datetime.date(sd.year, sd.month, sd.day).strftime('%s'),))
+    end_date = int('%s000' % (
+        t.strftime('%s'),))
     facets = api.search_questions(
-        gov_slug=gov_slug, page=1, size=0, start_date=start_date)
+        gov_slug=gov_slug, page=1, size=0, start_date=start_date,
+        end_date=end_date)
     results = api.search_questions(
         gov_slug=gov_slug, page=1, size=5, status='Openstaand',
-        start_date=start_date)
+        start_date=start_date, end_date=end_date)
     return render_template(
         'gov.html', gov_slug=gov_slug, results=results, facets=facets)
 
