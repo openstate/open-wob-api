@@ -252,6 +252,12 @@ class BackendAPI(object):
                 'from': "%s-%s-01T00:00:00" % (sd.year, sd.month,),
                 'to': "%s-%s-01T00:00:00" % (ed_year, ed_month,)}
 
+        if kwargs.get('start_date_end', None) is not None:
+            sd = datetime.datetime.fromtimestamp(
+                int(kwargs['start_date_end']) / 1000)
+            es_query['filters']['start_date']['to'] = "%s-%s-%sT23:59:59" % (
+                sd.year, sd.month, sd.day),
+
         if kwargs.get('end_date', None) is not None:
             ed = datetime.datetime.fromtimestamp(
                 int(kwargs['end_date']) / 1000)
@@ -327,10 +333,11 @@ def gov_home(gov_slug):
     end_date = int('%s000' % (
         t.strftime('%s'),))
     facets = api.search_questions(
-        gov_slug=gov_slug, page=1, size=0, start_date=start_date)
+        gov_slug=gov_slug, page=1, size=0, start_date=start_date,
+        start_date_end=end_date)
     results = api.search_questions(
         gov_slug=gov_slug, page=1, size=5, status='Openstaand',
-        start_date=start_date)
+        start_date=start_date, start_date_end=end_date)
     return render_template(
         'gov.html', gov_slug=gov_slug, results=results, facets=facets)
 
