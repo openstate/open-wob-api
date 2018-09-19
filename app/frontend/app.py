@@ -253,10 +253,10 @@ class BackendAPI(object):
                 'to': "%s-%s-01T00:00:00" % (ed_year, ed_month,)}
 
         if kwargs.get('start_date_end', None) is not None:
-            sd = datetime.datetime.fromtimestamp(
+            ed = datetime.datetime.fromtimestamp(
                 int(kwargs['start_date_end']) / 1000)
             es_query['filters']['start_date']['to'] = "%s-%s-%sT23:59:59" % (
-                sd.year, sd.month, sd.day),
+                ed.year, ed.month, ed.day),
 
         if kwargs.get('end_date', None) is not None:
             ed = datetime.datetime.fromtimestamp(
