@@ -59,10 +59,11 @@ services:
       context: app
       dockerfile: Dockerfile
     volumes:
-      - app:/opt/app
+      - ./app:/opt/app
     restart: always
     networks:
       - owa
+      - nginx-load-balancer
 volumes:
   esdata:
     driver: local
