@@ -10,7 +10,6 @@ services:
       - redis:redis
       - elasticsearch:elasticsearch
       - frontend:frontend
-    restart: always
     networks:
       - owa
     mem_limit: 1g
@@ -21,7 +20,6 @@ services:
       dockerfile: Dockerfile
     links:
       - elasticsearch:elasticsearch
-    restart: always
     networks:
       - owa
       - nginx-load-balancer
@@ -30,7 +28,6 @@ services:
     sysctls:
       - net.core.somaxconn=65535
     mem_limit: 4g
-    restart: always
     networks:
       - owa
   elasticsearch:
@@ -51,7 +48,6 @@ services:
       - IPC_LOCK
     volumes:
       - esdata:/usr/share/elasticsearch/data
-    restart: always  
     networks:
       - owa
   app:
@@ -62,7 +58,6 @@ services:
       - "5000:5000"
     volumes:
       - ./app:/opt/app
-    restart: always
     networks:
       - owa
       - nginx-load-balancer
