@@ -2,7 +2,8 @@
 cd /opt/owa
 source ../bin/activate
 
-OVERVIEW_URL=`curl -s 'https://ckan.dataplatform.nl/api/3/action/package_show?id=wob-verzoeken-utrecht-overzicht-2018' |./bin/get_newest_url.py`
+OVERVIEW_YEAR=`date '+%Y'``
+OVERVIEW_URL=`curl -s "https://ckan.dataplatform.nl/api/3/action/package_show?id=wob-verzoeken-utrecht-overzicht-$OVERVIEW_YEAR" |./bin/get_newest_url.py`
 
 if [ $? -eq 0 ];
 then
