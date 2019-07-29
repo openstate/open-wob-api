@@ -48,7 +48,7 @@ class UtrechtItem(BaseItem):
         except LookupError:
             rsbtn_url = self.original_item.xpath(
                 ".//a[@class='rsbtn_play']/@href")[0]
-            rsbtn_info = urlparse(rsbtn_url)
+            rsbtn_info = urlsplit(rsbtn_url)
             rsbtn_query = parse_qs(rsbtn_info.query)
             return unicode(rsbtn_query['url'])
 
