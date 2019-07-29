@@ -2,6 +2,7 @@ from datetime import datetime
 from hashlib import sha1
 import re
 import sys
+from urlparse import urlsplit, parse_qs
 
 from lxml import etree
 import iso8601
@@ -45,9 +46,11 @@ class UtrechtItem(BaseItem):
             return unicode(self.original_item.xpath(
                 ".//meta[@property='og:url']/@content")[0])
         except LookupError:
-            return unicode(self.original_item.xpath(
-                ".//a[@class='rsbtn_play']/@href")[0]).replace(
-                    u'https://app-eu.readspeaker.com/cgi-bin/rsent?customerid=7663&lang=nl_nl&readid=page-container&url=', u'')
+            rsbtn_url = self.original_item.xpath(
+                ".//a[@class='rsbtn_play']/@href")[0]
+            rsbtn_info = urlparse(rsbtn_url)
+            rsbtn_query = parse_qs(rsbtn_info.query)
+            return unicode(rsbtn_query['url'])
 
     def _get_basic_info(self):
         """
