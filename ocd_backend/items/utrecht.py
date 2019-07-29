@@ -50,7 +50,7 @@ class UtrechtItem(BaseItem):
                 ".//a[@class='rsbtn_play']/@href")[0]
             rsbtn_info = urlsplit(rsbtn_url)
             rsbtn_query = parse_qs(rsbtn_info.query)
-            return unicode(rsbtn_query['url'])
+            return unicode(rsbtn_query['url'][0])
 
     def _get_basic_info(self):
         """
