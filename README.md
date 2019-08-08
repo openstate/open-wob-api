@@ -1,4 +1,4 @@
-# Open Wob API
+# Open Wob API v2
 
 
 
